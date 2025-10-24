@@ -1,4 +1,14 @@
 /*
+* EECS 348 Lab 9 
+* Matrix Operations
+* Collaborators: None
+* Sources: None
+* Author: John Vitha
+* KU ID: 3158626
+* Creation date: 10/24/2025
+*/
+
+/*
 1. Read values from a file into the matrix:
 Implement a function to load matrix data from a user-specified file (you can use fstream/ifstream). The first line of the file should contain an integer N indicating the size of the matrices, followed by two N × N matrices. After reading the file, print the matrices with proper formatting, such as aligned columns. Note that N can be any valid positive integer.
 
@@ -25,10 +35,34 @@ Implement a func
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 using namespace std;
+
+int matrix_sum(int n, vector<vector<int>> matrix_a, vector<vector<int>> matrix_b){
+    vector<vector<int>> sum_matrix(n, vector<int>(n));
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j <n; j++){
+            sum_matrix[i][j] = matrix_a[i][j] + matrix_b[i][j];
+        }
+    }
+    return sum_matrix;
+}
+
+int matrix_product(int n, vector<vector<int>> matrix_a, vector<vector<int>> matrix_b){
+    vector<vector<int>> product_matrix(n, vector<int>(n));
+    for (int i 0; i < n; i++){
+        for (int j = 0; i < n; j++){ // nested loop to get index of element in product matrix
+            // another nested loop to get row*col
+            for (int k = 0; k < n; k++){
+                for(int l = 0; l < n; l++){
+                    row
+                }
+            }
+        }
+    }
+}
 
 int main(){
     string filename;
