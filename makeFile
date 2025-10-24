@@ -1,0 +1,10 @@
+CXX=g++ #C++ compiler
+CXXFLAGS = -Wall -Wextra -std=c++17 -O2 # Compiler flags
+all: prog # Build the program
+prog: lab9.o # Link files into prog
+	$(CXX) lab9.o -o prog
+lab9.o: lab9.cpp # Compile lab9.cpp
+	$(CXX) $(CXXFLAGS) -c lab9.cpp -o lab9.o 
+.PHONY: clean # Always run 'clean' as a command even if there is a file named 'clean'
+clean: # Delete compiled files
+	rm -f *.o prog
