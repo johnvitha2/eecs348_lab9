@@ -18,12 +18,13 @@
 using namespace std;
 
 vector<vector<int>> matrix_product(const vector<vector<int>>& matrix_a, const vector<vector<int>>& matrix_b){
-    vector<vector<int>> product_matrix(matrix_a.size(), vector<int>(matrix_a[0].size()));
-    for (size_t i = 0; i < matrix_a.size(); i++){
-        for (size_t j = 0; i < matrix_a[i].size(); j++){ 
+    size_t n = matrix_a.size();
+    vector<vector<int>> product_matrix(n, vector<int>(n));
+    for (size_t i = 0; i < n; i++){
+        for (size_t j = 0; j < n; j++){ 
             product_matrix[i][j] = 0;
-            for (size_t k = 0; k < matrix_a.size(); k++){
-                product_matrix[i][j] += matrix_a[i][j]*matrix_b[i][j];
+            for (size_t k = 0; k < n; k++){
+                product_matrix[i][j] += matrix_a[i][k]*matrix_b[k][j];
             }
         }
     }
@@ -54,7 +55,11 @@ int main(){
     string line;
     int n;
     file >> n;
-    file.ignore();
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            break;
+        }  
+    }
 
     vector<vector<int>> matrix_a(n, vector<int>(n));
     vector<vector<int>> matrix_b(n, vector<int>(n));

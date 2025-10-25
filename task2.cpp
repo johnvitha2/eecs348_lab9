@@ -51,7 +51,11 @@ int main(){
     string line;
     int n;
     file >> n;
-    file.ignore();
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            break;
+        }  
+    }
 
     vector<vector<int>> matrix_a(n, vector<int>(n));
     vector<vector<int>> matrix_b(n, vector<int>(n));

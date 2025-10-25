@@ -17,6 +17,22 @@
 #include <vector>
 using namespace std;
 
+int diagonal_sum(const vector<vector<int>>& matrix){
+    int sum = 0;
+    int column_index = 0;
+    for (size_t i = 0; i < matrix.size(); i++){
+        sum += matrix[i][column_index];
+        column_index += 1;
+    }
+    column_index = matrix.size()-1;
+    for (size_t i = 0; i < matrix.size(); i++){
+        sum += matrix[i][column_index];
+        column_index -= 1;
+
+    }
+    return sum;
+}
+
 void print_matrix(const vector<vector<int>>& matrix){
     for (size_t i = 0; i < matrix.size(); i++){
         for (size_t j = 0; j < matrix[i].size(); j++){
@@ -28,6 +44,7 @@ void print_matrix(const vector<vector<int>>& matrix){
 
 int main(){
     string filename;
+    char user_matrix;
     cout << "Enter a file: ";
     cin >> filename;
 
@@ -41,7 +58,11 @@ int main(){
     string line;
     int n;
     file >> n;
-    file.ignore();
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            break;
+        }  
+    }
 
     vector<vector<int>> matrix_a(n, vector<int>(n));
     vector<vector<int>> matrix_b(n, vector<int>(n));
@@ -59,10 +80,19 @@ int main(){
 
     file.close();
 
-    cout << "Matrix 1: " << endl;
-    print_matrix(matrix_a);
-    cout << "Matrix 2: " << endl;
-    print_matrix(matrix_b);
+    while(1){
+        cout << "Which matrix would you like to perform the operation on? Enter A or B: ";
+        cin >> user_matrix;
+        if(toupper(user_matrix) == 'A'){
+            cout << "Diagonal sum: " << diagonal_sum(matrix_a);
+            break;
+        } else if (toupper(user_matrix) == 'B'){
+            cout << "Diagonal sum: " << diagonal_sum(matrix_b);
+            break;
+        } else {
+            cout << "Invalid matrix selection. Please try again.";
+        }
+    }
 
     return 0;
 }

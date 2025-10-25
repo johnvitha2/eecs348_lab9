@@ -15,7 +15,15 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <cctype>
 using namespace std;
+
+void col_swap(int col1_index, int col2_index, vector<vector<int>>& matrix){
+    for (size_t i = 0; i < matrix.size(); i++){
+        swap(matrix[i][col1_index], matrix[i][col2_index]);
+    }
+}
 
 void print_matrix(const vector<vector<int>>& matrix){
     for (size_t i = 0; i < matrix.size(); i++){
@@ -28,6 +36,9 @@ void print_matrix(const vector<vector<int>>& matrix){
 
 int main(){
     string filename;
+    int col1_index;
+    int col2_index;
+    char user_matrix;
     cout << "Enter a file: ";
     cin >> filename;
 
@@ -41,7 +52,11 @@ int main(){
     string line;
     int n;
     file >> n;
-    file.ignore();
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            break;
+        }  
+    }
 
     vector<vector<int>> matrix_a(n, vector<int>(n));
     vector<vector<int>> matrix_b(n, vector<int>(n));
@@ -59,10 +74,40 @@ int main(){
 
     file.close();
 
-    cout << "Matrix 1: " << endl;
-    print_matrix(matrix_a);
-    cout << "Matrix 2: " << endl;
-    print_matrix(matrix_b);
+    while(1){
+        cout << "Enter the first column-index: ";
+        cin >> col1_index;
+        if(col1_index < 0 or col1_index >= n ){
+            cout << "Invalid column-index. Please try again.";
+        } else {
+            break;
+        }
+    }
+    while(1){
+        cout << "Enter the second column-index: ";
+        cin >> col2_index;
+        if(col2_index < 0 or col2_index >= n ){
+            cout << "Invalid column-index. Please try again.";
+        } else {
+            break;
+        }
+    }
+
+    while(1){
+        cout << "Which matrix would you like to perform the operation on? Enter A or B: ";
+        cin >> user_matrix;
+        if(toupper(user_matrix) == 'A'){
+            col_swap(col1_index, col2_index, matrix_a);
+            print_matrix(matrix_a);
+            exit(1);
+        } else if (toupper(user_matrix) == 'B'){
+            col_swap(col1_index, col2_index, matrix_b);
+            print_matrix(matrix_b);
+            exit(1);
+        } else {
+            cout << "Invalid matrix selection. Please try again.";
+        }
+    }
 
     return 0;
 }

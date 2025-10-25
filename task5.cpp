@@ -15,7 +15,13 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
+
+
+void row_swap(int row1_index, int row2_index, vector<vector<int>>& matrix){
+    swap(matrix[row1_index], matrix[row2_index]);
+}
 
 void print_matrix(const vector<vector<int>>& matrix){
     for (size_t i = 0; i < matrix.size(); i++){
@@ -28,6 +34,9 @@ void print_matrix(const vector<vector<int>>& matrix){
 
 int main(){
     string filename;
+    int row1_index;
+    int row2_index;
+    char user_matrix;
     cout << "Enter a file: ";
     cin >> filename;
 
@@ -41,7 +50,11 @@ int main(){
     string line;
     int n;
     file >> n;
-    file.ignore();
+    while (getline(file, line)) {
+        if (!line.empty()) {
+            break;
+        }  
+    }
 
     vector<vector<int>> matrix_a(n, vector<int>(n));
     vector<vector<int>> matrix_b(n, vector<int>(n));
@@ -59,10 +72,40 @@ int main(){
 
     file.close();
 
-    cout << "Matrix 1: " << endl;
-    print_matrix(matrix_a);
-    cout << "Matrix 2: " << endl;
-    print_matrix(matrix_b);
+    while(1){
+        cout << "Enter the first row-index: ";
+        cin >> row1_index;
+        if(row1_index < 0 or row1_index >= n ){
+            cout << "Invalid row-index. Please try again.";
+        } else {
+            break;
+        }
+    }
+    while(1){
+        cout << "Enter the second row-index: ";
+        cin >> row2_index;
+        if(row2_index < 0 or row2_index >= n ){
+            cout << "Invalid row-index. Please try again.";
+        } else {
+            break;
+        }
+    }
+
+    while(1){
+        cout << "Which matrix would you like to perform the operation on? Enter A or B: ";
+        cin >> user_matrix;
+        if(toupper(user_matrix) == 'A'){
+            row_swap(row1_index, row2_index, matrix_a);
+            print_matrix(matrix_a);
+            break;
+        } else if (toupper(user_matrix) == 'B'){
+            row_swap(row1_index, row2_index, matrix_b);
+            print_matrix(matrix_b);
+            break;
+        } else {
+            cout << "Invalid matrix selection. Please try again.";
+        }
+    }
 
     return 0;
 }

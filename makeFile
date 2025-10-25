@@ -1,22 +1,9 @@
-CXX=g++ # C++ compiler
-CXXFLAGS = -Wall -Wextra -std=c++17 -O2 # Compiler flags
-all: prog # Build the program
-prog: task1.o task2.o task3.o task4.o task5.o task6.o task7.o # Link files into prog
-	$(CXX) task1.o task2.o task3.o task4.o task5.o task6.o task7.o -o prog
-task1.o: task1.cpp # Compile task1.cpp
-	$(CXX) $(CXXFLAGS) -c task1.cpp -o task1.o 
-task2.o: task2.cpp # Compile task2.cpp
-	$(CXX) $(CXXFLAGS) -c task2.cpp -o task2.o 
-task3.o: task3.cpp # Compile task3.cpp
-	$(CXX) $(CXXFLAGS) -c task3.cpp -o task3.o 
-task4.o: task4.cpp # Compile task4.cpp
-	$(CXX) $(CXXFLAGS) -c task4.cpp -o task4.o 
-task5.o: task5.cpp # Compile task5.cpp
-	$(CXX) $(CXXFLAGS) -c task5.cpp -o task5.o 
-task6.o: task6.cpp # Compile task6.cpp
-	$(CXX) $(CXXFLAGS) -c task6.cpp -o task6.o 
-task7.o: task7.cpp # Compile task7.cpp
-	$(CXX) $(CXXFLAGS) -c task7.cpp -o task7.o 
-.PHONY: clean # Always run 'clean' as a command even if there is a file named 'clean'
-clean: # Delete compiled files
-	rm -f *.o prog
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++17 -O2
+TASKS = task1 task2 task3 task4 task5 task6 task7
+all: $(TASKS)
+%: %.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $<
+.PHONY: clean
+clean:
+	rm -f $(TASKS)
