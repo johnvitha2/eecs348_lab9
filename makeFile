@@ -1,10 +1,22 @@
-CXX=g++ #C++ compiler
+CXX=g++ # C++ compiler
 CXXFLAGS = -Wall -Wextra -std=c++17 -O2 # Compiler flags
 all: prog # Build the program
-prog: lab9.o # Link files into prog
-	$(CXX) lab9.o -o prog
-lab9.o: lab9.cpp # Compile lab9.cpp
-	$(CXX) $(CXXFLAGS) -c lab9.cpp -o lab9.o 
+prog: task1.o task2.o task3.o task4.o task5.o task6.o task7.o # Link files into prog
+	$(CXX) task1.o task2.o task3.o task4.o task5.o task6.o task7.o -o prog
+task1.o: task1.cpp # Compile task1.cpp
+	$(CXX) $(CXXFLAGS) -c task1.cpp -o task1.o 
+task2.o: task2.cpp # Compile task2.cpp
+	$(CXX) $(CXXFLAGS) -c task2.cpp -o task1.o 
+task3.o: task3.cpp # Compile task3.cpp
+	$(CXX) $(CXXFLAGS) -c task3.cpp -o task1.o 
+task4.o: task4.cpp # Compile task4.cpp
+	$(CXX) $(CXXFLAGS) -c task4.cpp -o task1.o 
+task5.o: task5.cpp # Compile task5.cpp
+	$(CXX) $(CXXFLAGS) -c task5.cpp -o task1.o 
+task6.o: task6.cpp # Compile task6.cpp
+	$(CXX) $(CXXFLAGS) -c task6.cpp -o task1.o 
+task7.o: task7.cpp # Compile task7.cpp
+	$(CXX) $(CXXFLAGS) -c task7.cpp -o task1.o 
 .PHONY: clean # Always run 'clean' as a command even if there is a file named 'clean'
 clean: # Delete compiled files
 	rm -f *.o prog
