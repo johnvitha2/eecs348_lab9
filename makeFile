@@ -6,17 +6,17 @@ prog: task1.o task2.o task3.o task4.o task5.o task6.o task7.o # Link files into 
 task1.o: task1.cpp # Compile task1.cpp
 	$(CXX) $(CXXFLAGS) -c task1.cpp -o task1.o 
 task2.o: task2.cpp # Compile task2.cpp
-	$(CXX) $(CXXFLAGS) -c task2.cpp -o task1.o 
+	$(CXX) $(CXXFLAGS) -c task2.cpp -o task2.o 
 task3.o: task3.cpp # Compile task3.cpp
-	$(CXX) $(CXXFLAGS) -c task3.cpp -o task1.o 
+	$(CXX) $(CXXFLAGS) -c task3.cpp -o task3.o 
 task4.o: task4.cpp # Compile task4.cpp
-	$(CXX) $(CXXFLAGS) -c task4.cpp -o task1.o 
+	$(CXX) $(CXXFLAGS) -c task4.cpp -o task4.o 
 task5.o: task5.cpp # Compile task5.cpp
-	$(CXX) $(CXXFLAGS) -c task5.cpp -o task1.o 
+	$(CXX) $(CXXFLAGS) -c task5.cpp -o task5.o 
 task6.o: task6.cpp # Compile task6.cpp
-	$(CXX) $(CXXFLAGS) -c task6.cpp -o task1.o 
+	$(CXX) $(CXXFLAGS) -c task6.cpp -o task6.o 
 task7.o: task7.cpp # Compile task7.cpp
-	$(CXX) $(CXXFLAGS) -c task7.cpp -o task1.o 
+	$(CXX) $(CXXFLAGS) -c task7.cpp -o task7.o 
 .PHONY: clean # Always run 'clean' as a command even if there is a file named 'clean'
 clean: # Delete compiled files
 	rm -f *.o prog

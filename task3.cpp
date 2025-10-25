@@ -17,18 +17,17 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int>> matrix_product(int n, vector<vector<int>> matrix_a, vector<vector<int>> matrix_b){
-    vector<vector<int>> product_matrix(n, vector<int>(n));
-    for (int i = 0; i < n; i++){
-        for (int j = 0; i < n; j++){ // nested loop to get index of element in product matrix
-            // another nested loop to get row*col
-            for (int k = 0; k < n; k++){
-                for(int l = 0; l < n; l++){
-                    //row
-                }
+vector<vector<int>> matrix_product(const vector<vector<int>>& matrix_a, const vector<vector<int>>& matrix_b){
+    vector<vector<int>> product_matrix(matrix_a.size(), vector<int>(matrix_a[0].size()));
+    for (size_t i = 0; i < matrix_a.size(); i++){
+        for (size_t j = 0; i < matrix_a[i].size(); j++){ 
+            product_matrix[i][j] = 0;
+            for (size_t k = 0; k < matrix_a.size(); k++){
+                product_matrix[i][j] += matrix_a[i][j]*matrix_b[i][j];
             }
         }
     }
+    return product_matrix;
 }
 
 void print_matrix(const vector<vector<int>>& matrix){
@@ -74,7 +73,7 @@ int main(){
     file.close();
 
     cout << "Product of the two matrices: " << endl;
-    print_matrix(matrix_product(n, matrix_a, matrix_b));
+    print_matrix(matrix_product(matrix_a, matrix_b));
 
     return 0;
 }
