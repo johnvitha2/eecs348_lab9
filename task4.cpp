@@ -45,14 +45,13 @@ void print_matrix(const vector<vector<int>>& matrix){
 int main(){
     string filename;
     char user_matrix;
-    cout << "Enter a file: ";
-    cin >> filename;
-
-    ifstream file(filename);
-
-    if(!file){
-        cout << "Error: File could not be opened." << endl;
-        return 1;
+    ifstream file;
+    while(1){
+        cout << "Enter a file: ";
+        cin >> filename;
+        file.open(filename);
+        if(file) break;
+        cout << "Invalid file. Please try again." << endl;
     }
 
     string line;

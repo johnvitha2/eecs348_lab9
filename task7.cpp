@@ -31,21 +31,19 @@ void print_matrix(const vector<vector<int>>& matrix){
 }
 
 int main(){
-    string filename;
     int row_index;
     int col_index;
     int new_value;
     char user_matrix;
-    cout << "Enter a file: ";
-    cin >> filename;
-
-    ifstream file(filename);
-
-    if(!file){
-        cout << "Error: File could not be opened." << endl;
-        return 1;
+    string filename;
+    ifstream file;
+    while(1){
+        cout << "Enter a file: ";
+        cin >> filename;
+        file.open(filename);
+        if(file) break;
+        cout << "Invalid file. Please try again." << endl;
     }
-
     string line;
     int n;
     file >> n;
@@ -71,17 +69,16 @@ int main(){
 
     file.close();
 
-    cout << "Matrix 1: " << endl;
-    print_matrix(matrix_a);
-    cout << "Matrix 2: " << endl;
-    print_matrix(matrix_b);
-
-
     while(1){
         cout << "Enter a row-index: ";
-        cin >> row_index;
+        if (!(cin >> row_index)){
+            cout << "Invalid row-index. Please enter an integer." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        } 
         if(row_index < 0 or row_index >= n ){
-            cout << "Invalid row-index. Please try again.";
+            cout << "Invalid row-index. Please enter an index within the matrix bounds." << endl;
         } else {
             break;
         }
@@ -89,16 +86,29 @@ int main(){
 
     while(1){
         cout << "Enter a column-index: ";
-        cin >> col_index;
+        if (!(cin >> col_index)){
+            cout << "Invalid column-index. Please enter an integer." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
         if(col_index < 0 or col_index >= n ){
-            cout << "Invalid column-index. Please try again.";
+            cout << "Invalid column-index. Please enter an index within the matrix bounds." << endl;
         } else {
             break;
         }
     }
 
-    cout << "Enter a new value: ";
-    cin >> new_value; 
+    while(1){
+        cout << "Enter a new value: ";
+        if(cin >> new_value){
+            break;
+        } else {
+            cout << "Invalid new value. Please enter an number." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+        }
+    }
 
     while(1){
         cout << "Which matrix would you like to update? Enter A or B: ";
@@ -112,7 +122,7 @@ int main(){
             print_matrix(matrix_b);
             break;
         } else {
-            cout << "Invalid matrix selection. Please try again.";
+            cout << "Invalid matrix selection. Please try again." << endl;
         }
     }
     

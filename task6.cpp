@@ -35,18 +35,18 @@ void print_matrix(const vector<vector<int>>& matrix){
 }
 
 int main(){
-    string filename;
+
     int col1_index;
     int col2_index;
     char user_matrix;
-    cout << "Enter a file: ";
-    cin >> filename;
-
-    ifstream file(filename);
-
-    if(!file){
-        cout << "Error: File could not be opened." << endl;
-        return 1;
+    string filename;
+    ifstream file;
+    while(1){
+        cout << "Enter a file: ";
+        cin >> filename;
+        file.open(filename);
+        if(file) break;
+        cout << "Invalid file. Please try again." << endl;
     }
 
     string line;
@@ -76,18 +76,29 @@ int main(){
 
     while(1){
         cout << "Enter the first column-index: ";
-        cin >> col1_index;
+        if (!(cin >> col1_index)){
+            cout << "Invalid column-index. Please enter an integer." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
         if(col1_index < 0 or col1_index >= n ){
-            cout << "Invalid column-index. Please try again.";
+            cout << "Invalid column-index. Please enter an index within the matrix bounds." << endl;
         } else {
             break;
         }
     }
+
     while(1){
         cout << "Enter the second column-index: ";
-        cin >> col2_index;
+        if (!(cin >> col2_index)){
+            cout << "Invalid column-index. Please enter an integer." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
         if(col2_index < 0 or col2_index >= n ){
-            cout << "Invalid column-index. Please try again.";
+            cout << "Invalid column-index. Please enter an index within the matrix bounds." << endl;
         } else {
             break;
         }
@@ -105,7 +116,7 @@ int main(){
             print_matrix(matrix_b);
             exit(1);
         } else {
-            cout << "Invalid matrix selection. Please try again.";
+            cout << "Invalid matrix selection. Please try again." << endl;
         }
     }
 
